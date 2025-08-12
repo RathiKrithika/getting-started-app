@@ -1,4 +1,4 @@
-name: 1Deploy Node & MySQL App to EC2
+name: 2Deploy Node & MySQL App to EC2
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: Build Environment
+    environment: Production Environment
 
     steps:
       - name: Deploy over SSH
