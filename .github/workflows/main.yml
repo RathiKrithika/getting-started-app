@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Deploy over SSH
         run: |
-          echo "${{ secrets.EC2_KEY }}" > key.pem
+          echo "${{ secrets.EC2_KEY }}" | tr -d '\r' >  key.pem
           chmod 600 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem ${{ vars.EC2_USERNAME }}@${{ vars.EC2_HOST }} << 'EOF'
             set -e
