@@ -1,4 +1,4 @@
-name: 2Deploy Node & MySQL App to EC2
+name: 4Deploy Node & MySQL App to EC2
 
 on:
   workflow_dispatch:
@@ -21,8 +21,8 @@ jobs:
             }
             git reset --hard
             git pull origin main
-            docker compose -f compose.yaml pull
-            docker compose -f compose.yaml up -d --remove-orphans
+            docker-compose -f compose.yaml pull
+            docker-compose -f compose.yaml up -d --remove-orphans
           EOF
 
           # Delete PEM key for security
