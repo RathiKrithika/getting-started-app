@@ -1,4 +1,4 @@
-name: Deploy Node & MySQL App to EC2
+name: 1Deploy Node & MySQL App to EC2
 
 on:
   workflow_dispatch:
