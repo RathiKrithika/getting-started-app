@@ -1,0 +1,29 @@
+name: Deploy Node & MySQL App to EC2
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Build Environment
+
+    steps:
+      - name: Deploy over SSH
+        run: |
+          echo "${{ secrets.EC2_KEY }}" > key.pem
+          chmod 600 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ vars.EC2_USERNAME }}@${{ vars.EC2_HOST }} << 'EOF'
+            set -e
+            cd /home/ubuntu/getting-started-app || {
+              git clone https://github.com/RathiKrithika/getting-started-app
+              cd /home/ubuntu/getting-started-app
+            }
+            git reset --hard
+            git pull origin main
+            docker compose -f compose.yaml pull
+            docker compose -f compose.yaml up -d --remove-orphans
+          EOF
+
+          # Delete PEM key for security
+          shred -u key.pem
