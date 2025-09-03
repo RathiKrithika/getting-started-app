@@ -37,7 +37,11 @@ jobs:
             fi
             cd "$HOME/getting-started-app"
             git pull origin main
-
+            # Ensure Minikube is running
+            if ! minikube status >/dev/null 2>&1; then
+                minikube start --driver=docker
+            fi
+          
             kubectl delete secret docker-secret --ignore-not-found
             kubectl create secret docker-registry docker-secret \
               --docker-username='${{ vars.DOCKER_USERNAME }}' \
