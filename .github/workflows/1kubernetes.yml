@@ -35,7 +35,7 @@ jobs:
             if [ ! -d "$HOME/getting-started-app" ]; then
               git clone https://github.com/RathiKrithika/getting-started-app "$HOME/getting-started-app"
             fi
-            cd "$HOME/getting-started-app"
+            cd "$HOME/getting-started-app/k8s"
             git pull origin main
             # Ensure Minikube is running
             if ! minikube status >/dev/null 2>&1; then
